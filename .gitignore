@@ -1,0 +1,7 @@
+node_modules/
+database.sql
+.env
+data/
+cookies.txt
+*.log
+EIF

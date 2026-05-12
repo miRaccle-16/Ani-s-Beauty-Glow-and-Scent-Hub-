@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ani's Beauty Glow & Scent Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes spin-glow {
+            0% { box-shadow: 0 0 0 0 rgba(201, 123, 107, 0.4), 0 4px 15px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 0 0 10px rgba(201, 123, 107, 0.1), 0 4px 20px rgba(201, 123, 107, 0.4); }
+            100% { box-shadow: 0 0 0 0 rgba(201, 123, 107, 0.4), 0 4px 15px rgba(0,0,0,0.2); }
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fff9f7 0%, #ffe8e0 100%);
+            color: #2d2a2a;
+            padding-bottom: 80px;
+        }
+
+        /* 3D Button Style */
+        .btn-3d {
+            background: #c97b6b;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 5px 0 #8b5a4e;
+            transition: all 0.1s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        .btn-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 #8b5a4e;
+        }
+        .btn-3d:hover {
+            background: #b45f50;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 0 #8b5a4e;
+        }
+
+        /* Glowing Chat Button */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #c97b6b;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 28px;
+            animation: spin-glow 2s infinite;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .chat-button:hover {
+            transform: scale(1.08);
+        }
+
+        .navbar {
+            background: rgba(255, 250, 247, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #f0d7d0;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #c97b6b, #e4a599);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #4a3b3a;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover {
+            color: #c97b6b;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at 10% 30%, rgba(244, 200, 188, 0.4), transparent);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+        .hero .accent {
+            background: linear-gradient(135deg, #c97b6b, #e4a599);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 25px -8px rgba(0,0,0,0.1);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .product-info {
+            padding: 20px;
+        }
+        .product-brand {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #c97b6b;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .product-name {
+            font-size: 1.1rem;
+            margin: 8px 0;
+            font-weight: 600;
+        }
+        .product-price {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #c97b6b;
+        }
+        .affiliate-btn {
+            display: block;
+            background: linear-gradient(135deg, #c97b6b, #e4a599);
+            color: white;
+            padding: 12px;
+            border-radius: 40px;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 12px;
+            transition: opacity 0.2s;
+            font-weight: 600;
+        }
+        .affiliate-btn:hover {
+            opacity: 0.9;
+        }
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            padding-top: 12px;
+            border-top: 1px solid #f0d7d0;
+            flex-wrap: wrap;
+        }
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 30px;
+            transition: all 0.2s;
+        }
+        .action-btn:hover {
+            background: #f0e2de;
+        }
+        .like-btn.liked {
+            color: #e74c3c;
+        }
+        .comment-section {
+            margin-top: 15px;
+            display: none;
+        }
+        .comment-section.show {
+            display: block;
+        }
+        .comment-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        .comment-input input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #f0d7d0;
+            border-radius: 30px;
+            font-family: inherit;
+        }
+        .comment-input button {
+            background: #c97b6b;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .comment-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .comment-item {
+            padding: 10px;
+            border-bottom: 1px solid #f0d7d0;
+            font-size: 13px;
+        }
+        .comment-name {
+            font-weight: bold;
+            color: #c97b6b;
+            cursor: pointer;
+        }
+        .comment-time {
+            font-size: 10px;
+            color: #999;
+            margin-left: 8px;
+        }
+        .reply-link {
+            font-size: 11px;
+            color: #c97b6b;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .reply-form {
+            display: none;
+            margin-top: 8px;
+            margin-left: 20px;
+        }
+        .reply-form input {
+            width: 80%;
+            padding: 6px;
+            border-radius: 20px;
+            border: 1px solid #f0d7d0;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px;
+            background: #2b2422;
+            color: #e9cfc7;
+            margin-top: 60px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 32px;
+            width: 90%;
+            max-width: 400px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-content h2 {
+            color: #c97b6b;
+            margin-bottom: 20px;
+        }
+        .modal-content input, .modal-content textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            border: 1px solid #f0d7d0;
+            border-radius: 40px;
+        }
+        .modal-content button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .switch-auth {
+            text-align: center;
+            margin-top: 16px;
+            color: #c97b6b;
+            cursor: pointer;
+        }
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            text-align: center;
+        }
+        .success-msg {
+            color: green;
+            font-size: 12px;
+            text-align: center;
+        }
+/* Profile Popup */
+.profile-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    z-index: 1001;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+    display: none;
+}
+.profile-popup.show {
+    display: block;
+}
+.profile-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    display: none;
+}
+.profile-popup-overlay.show {
+    display: block;
+}
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 15px;
+    display: block;
+}
+.profile-name {
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #c97b6b;
+}
+.profile-email {
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}
+.profile-bio {
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    margin: 10px 0;
+    padding: 10px;
+    background: #fef5f2;
+    border-radius: 12px;
+}
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #999;
+}
+        @media (max-width: 600px) {
+            .nav-container { flex-direction: column; }
+            .products-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">✨ Ani's Beauty Glow & Scent Hub</div>
+            <div class="nav-links">
+                <a href="#" onclick="filterProducts('all')">Home</a>
+                <a href="#" onclick="filterProducts('skincare')">Skincare</a>
+                <a href="#" onclick="filterProducts('fragrance')">Fragrance</a>
+                <a href="#" id="authNavLink" onclick="openAuthModal()">👤 Sign Up / Login</a>
+                <a href="/admin" style="color:#c97b6b;">👑 Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Glow Naturally, <span class="accent">Scent Beautifully</span></h1>
+        <p>Curated affiliate picks from iconic beauty brands</p>
+    </section>
+
+    <div class="container">
+        <div id="productsGrid" class="products-grid">Loading products...</div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 Ani's Beauty Glow — Affiliate Love ❤️</p>
+    </footer>
+    
+    <!-- Auth Modal -->
+ <div id="authModal" class="modal">
+    <div class="modal-content">
+        <div id="loginForm">
+            <h2>🔐 Login</h2>
+            <div id="authError" class="error-msg"></div>
+            <input type="email" id="loginEmail" placeholder="Email">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button class="btn-3d" onclick="clientLogin()">Login</button>
+            <div style="text-align:center; margin-top:10px;">
+                <a href="#" onclick="showForgotPasswordModal()" style="color:#c97b6b; font-size:12px;">Forgot Password?</a>
+            </div>
+            <div class="switch-auth" onclick="showSignup()">Don't have an account? Sign Up</div>
+        </div>
+        <div id="signupForm" style="display:none;">
+            <h2>📝 Sign Up</h2>
+            <div id="signupError" class="error-msg"></div>
+            <input type="text" id="signupFullname" placeholder="Full Name">
+            <input type="email" id="signupEmail" placeholder="Email">
+            <input type="tel" id="signupPhone" placeholder="Phone (optional)">
+            <input type="password" id="signupPassword" placeholder="Password">
+            <input type="file" id="signupProfilePic" accept="image/*">
+            <button class="btn-3d" onclick="clientSignup()">Sign Up</button>
+            <div class="switch-auth" onclick="showLogin()">Already have an account? Login</div>
+        </div>
+        <div id="forgotPasswordForm" style="display:none;">
+            <h2>🔑 Reset Password</h2>
+            <div id="resetError" class="error-msg"></div>
+            <input type="email" id="resetEmail" placeholder="Email">
+            <button class="btn-3d" onclick="sendPasswordReset()">Send Reset Link</button>
+            <div class="switch-auth" onclick="showLogin()">Back to Login</div>
+        </div>
+    </div>
+    
+    <!-- Profile Popup -->
+<div id="profilePopupOverlay" class="profile-popup-overlay" onclick="closeProfilePopup()"></div>
+<div id="profilePopup" class="profile-popup">
+    <button class="close-popup" onclick="closeProfilePopup()">✕</button>
+    <img id="popupAvatar" class="profile-avatar" src="" alt="Profile">
+    <div id="popupName" class="profile-name"></div>
+    <div id="popupEmail" class="profile-email"></div>
+    <div id="popupBio" class="profile-bio"></div>
+    <div id="popupMemberSince" style="text-align:center; font-size:11px; color:#999;"></div>
+    <button id="popupMessageBtn" class="btn-3d" style="margin-top:15px; width:100%; display:none;" onclick="startChatFromPopup()">Send Message</button>
+</div>
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" class="modal">
+    <div class="modal-content">
+        <h2>👤 My Profile</h2>
+        <div id="profileInfo"></div>
+        <button class="btn-3d" onclick="logout()" style="background:#666;">Logout</button>
+        <div class="switch-auth" onclick="closeProfileModal()">Close</div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div id="editProfileModal" class="modal">
+    <div class="modal-content">
+        <h2>✏️ Edit Profile</h2>
+        <div id="editProfileMessage"></div>
+        <input type="text" id="editFullname" placeholder="Full Name">
+        <input type="tel" id="editPhone" placeholder="Phone">
+        <textarea id="editBio" rows="3" placeholder="Bio"></textarea>
+        <input type="file" id="editProfilePic" accept="image/*">
+        <button class="btn-3d" onclick="updateProfile()">Save Changes</button>
+        <div class="switch-auth" onclick="closeEditProfileModal()">Cancel</div>
+    </div>
+</div>
+
+<!-- Glowing Chat Button -->
+<div id="chatButton" class="chat-button" style="display:none;" onclick="toggleChat()">
+    💬
+    <span id="unreadChatBadge" style="position:absolute; top:-5px; right:-5px; background:red; color:white; border-radius:50%; padding:2px 6px; font-size:10px; display:none;">0</span>
+</div>
+
+<!-- Chat Modal -->
+<!-- Chat Modal -->
+<div id="chatModal" class="modal">
+    <div class="modal-content chat-modal-content">
+        <div class="chat-header">
+            <h2>💬 Chat with Ani</h2>
+            <button onclick="toggleChat()" style="background:none; border:none; font-size:24px; cursor:pointer; color:#999;">✕</button>
+        </div>
+        <div id="chatMessages" class="chat-messages-container">
+            <div style="text-align:center;padding:20px;color:#999;">Loading messages...</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type your message..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+            <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentCategory = 'all';
+    let currentClient = null;
+    let messageInterval = null;
+
+    // ========== PRODUCT LOADING ==========
+ async function loadProducts() {
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = '<div style="text-align:center;padding:40px;">Loading...</div>';
+    let url = '/api/products';
+    if (currentCategory !== 'all') url += `?category=${currentCategory}`;
+    
+    try {
+        const response = await fetch(url);
+        const products = await response.json();
+        
+        if (products.length === 0) {
+            grid.innerHTML = '<div style="text-align:center;padding:40px;">✨ No products yet ✨</div>';
+            return;
+        }
+        
+        // Determine if user is logged in
+        const isLoggedIn = currentClient !== null;
+        
+        // First, render all products
+        grid.innerHTML = products.map(product => {
+            const likeButtonText = product.likes || 0;
+            
+            return `
+                <div class="product-card">
+                    <img class="product-img" src="${product.image_url || 'https://placehold.co/400x400/f5c8bf/fff?text=Beauty'}" alt="${product.name}" onclick="downloadImage('${product.image_url || 'https://placehold.co/400x400/f5c8bf/fff?text=Beauty'}', '${product.name}')">
+                    <div class="product-info">
+                        <div class="product-brand">${escapeHtml(product.brand) || 'Premium'}</div>
+                        <div class="product-name">${escapeHtml(product.name)}</div>
+                        <div class="product-price">₦${(product.price * 600).toLocaleString()}</div>
+                        <a href="${product.affiliate_link || 'https://amazon.com'}" target="_blank" class="affiliate-btn">Shop Now →</a>
+                        <div class="product-actions">
+                            <button class="action-btn like-btn" onclick="toggleLike(${product.id}, this)">❤️ ${likeButtonText}</button>
+                            <button class="action-btn" onclick="toggleComments(${product.id})">💬 ${product.comment_count || 0}</button>
+                            <button class="action-btn" onclick="downloadImage('${product.image_url || 'https://placehold.co/400x400/f5c8bf/fff?text=Beauty'}', '${product.name}')">📥 Save</button>
+                        </div>
+                        <div id="comments-${product.id}" class="comment-section">
+    <div class="comment-input">
+        <input type="text" id="comment-input-${product.id}" placeholder="${isLoggedIn ? 'Write a comment...' : 'Login to comment'}">
+        <input type="file" id="comment-image-${product.id}" accept="image/*" style="display:none;">
+        <button class="image-upload-btn" onclick="document.getElementById('comment-image-${product.id}').click()">📷</button>
+        <button onclick="addCommentWithImage(${product.id})" ${!isLoggedIn ? 'disabled style="opacity:0.5;"' : ''}>Post</button>
+    </div>
+    <div id="comment-list-${product.id}" class="comment-list"></div>
+</div>
+
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        // Then load comments for each product AFTER they exist in DOM
+        for (const product of products) {
+            await loadComments(product.id);
+        }
+        
+    } catch (error) {
+        console.error('Load products error:', error);
+        grid.innerHTML = '<div style="text-align:center;padding:40px;">Error loading products</div>';
+    }
+}
+
+async function toggleLike(productId, btnElement) {
+    try {
+        const response = await fetch(`/api/products/${productId}/like`, { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.success) {
+            // Refresh just the like count without reloading all products
+            const productCard = btnElement.closest('.product-card');
+            const likeSpan = btnElement.querySelector('span') || btnElement;
+            
+            // Get current count from the button text
+            let currentText = btnElement.innerHTML;
+            let currentCount = parseInt(currentText.match(/\d+/)?.[0] || 0);
+            let newCount = currentCount + 1;
+            
+            // Update the button text
+            btnElement.innerHTML = `❤️ ${newCount}`;
+            
+            // Also update the server by reloading products in background
+            loadProducts();
+        } else {
+            alert('Failed to like. Please try again.');
+        }
+    } catch (error) {
+        console.error('Like error:', error);
+        alert('Connection error. Please try again.');
+    }
+}
+async function addCommentWithImage(productId) {
+    const input = document.getElementById(`comment-input-${productId}`);
+    const comment = input.value.trim();
+    const imageInput = document.getElementById(`comment-image-${productId}`);
+    const imageFile = imageInput.files[0];
+    
+    if (!comment && !imageFile) {
+        alert('Please enter a comment or select an image');
+        return;
+    }
+    
+    // Use "Guest" if not logged in
+    const clientName = currentClient ? currentClient.name : 'Guest';
+    
+    const formData = new FormData();
+    formData.append('comment', comment || '');
+    formData.append('clientName', clientName);
+    if (imageFile) formData.append('commentImage', imageFile);
+    
+    try {
+        const response = await fetch(`/api/products/${productId}/comment`, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            input.value = '';
+            imageInput.value = '';
+            await loadComments(productId);
+            await loadProducts();
+        } else {
+            alert('Failed to post comment: ' + (data.error || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Comment error:', error);
+        alert('Connection error. Please try again.');
+    }
+}
+ async function loadComments(productId) {
+    const container = document.getElementById(`comment-list-${productId}`);
+    
+    if (!container) {
+        console.log('Container not ready yet for product:', productId);
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/products/${productId}/comments`);
+        const comments = await response.json();
+        
+        if (comments.length === 0) {
+            container.innerHTML = '<div style="text-align:center;padding:10px;color:#999;">No comments yet. Be the first!</div>';
+            return;
+        }
+        
+        container.innerHTML = comments.map(c => `
+    <div class="comment-item">
+        <div style="display:flex; align-items:center; gap:8px;">
+            <img src="${c.profile_pic || 'https://via.placeholder.com/30x30?text=' + (c.client_name?.charAt(0) || 'G')}" 
+                 style="width:30px; height:30px; border-radius:50%; object-fit:cover; cursor:pointer;" 
+                 onclick="viewUserProfile(${c.client_id || 0}, '${escapeHtml(c.client_name)}')">
+            <span class="comment-name" onclick="viewUserProfile(${c.client_id || 0}, '${escapeHtml(c.client_name)}')" style="cursor:pointer;">
+                ${escapeHtml(c.client_name || 'Guest')}
+            </span>
+            <span class="comment-time">${new Date(c.created_at).toLocaleString()}</span>
+        </div>
+        <div>${escapeHtml(c.comment)}</div>
+        ${c.image_url ? `<img src="${c.image_url}" style="max-width:150px; max-height:150px; border-radius:10px; margin-top:8px; cursor:pointer;" onclick="window.open('${c.image_url}', '_blank')">` : ''}
+        <span class="reply-link" onclick="showReplyForm(${c.id}, ${productId})">💬 Reply</span>
+        <div id="reply-form-${c.id}" class="reply-form">
+            <input type="text" id="reply-input-${c.id}" placeholder="Write a reply...">
+            <button onclick="submitReply(${c.id}, ${productId})">Reply</button>
+        </div>
+    </div>
+`).join('');
+    } catch (error) {
+        console.error('Error loading comments for product', productId, ':', error);
+        if (container) {
+            container.innerHTML = '<div style="color:red;">Error loading comments</div>';
+        }
+    }
+}
+    function showReplyForm(commentId, productId) {
+        const form = document.getElementById(`reply-form-${commentId}`);
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function submitReply(parentCommentId, productId) {
+    const input = document.getElementById(`reply-input-${parentCommentId}`);
+    const comment = input.value.trim();
+    if (!comment) return;
+    
+    // Use "Guest" if not logged in
+    const clientName = currentClient ? currentClient.name : 'Guest';
+    
+    try {
+        const response = await fetch(`/api/products/${productId}/comment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ comment, clientName, replyTo: parentCommentId })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            input.value = '';
+            loadComments(productId);
+            loadProducts();
+        } else {
+            alert('Failed to post reply');
+        }
+    } catch (error) {
+        console.error('Reply error:', error);
+        alert('Connection error');
+    }
+}
+
+ async function addComment(productId) {
+    const input = document.getElementById(`comment-input-${productId}`);
+    if (!input) {
+        console.error('Comment input not found for product:', productId);
+        return;
+    }
+    
+    const comment = input.value.trim();
+    if (!comment) return;
+    
+    // Use "Guest" if not logged in
+    const clientName = currentClient ? currentClient.name : 'Guest';
+    
+    try {
+        const response = await fetch(`/api/products/${productId}/comment`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ comment, clientName })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            input.value = '';
+            await loadComments(productId);
+            await loadProducts(); // Refresh to update comment count
+        } else {
+            alert('Failed to post comment: ' + (data.error || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Comment error:', error);
+        alert('Connection error. Please try again.');
+    }
+}
+
+  function toggleComments(productId) {
+    const section = document.getElementById(`comments-${productId}`);
+    if (!section) {
+        console.log('Comments section not found for product:', productId);
+        return;
+    }
+    
+    section.classList.toggle('show');
+    if (section.classList.contains('show')) {
+        loadComments(productId);
+    }
+}
+
+    function downloadImage(url, filename) {
+    if (!url || url === 'https://placehold.co/400x400/f5c8bf/fff?text=Beauty') {
+        alert('No image available to download');
+        return;
+    }
+    
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const link = document.createElement('a');
+            const objectUrl = URL.createObjectURL(blob);
+            link.href = objectUrl;
+            link.download = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase() + '.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(objectUrl);
+        })
+        .catch(() => {
+            // Fallback for mobile - open image in new tab
+            window.open(url, '_blank');
+        });
+}
+    function filterProducts(category) { currentCategory = category; loadProducts(); }
+    // ========== AUTH FUNCTIONS ==========
+
+async function checkClientSession() {
+    try {
+        const response = await fetch('/api/client/check');
+        const data = await response.json();
+        
+        console.log('Session check:', data); // Debug log
+        
+        if (data.loggedIn) {
+            currentClient = { 
+                id: data.clientId || data.id, 
+                name: data.clientName || data.name || 'User' 
+            };
+            
+            // Update navigation
+            const authLink = document.getElementById('authNavLink');
+            authLink.innerHTML = `👤 ${currentClient.name} ▼`;
+            authLink.onclick = () => openProfileModal();
+            
+            // Show chat button
+            const chatBtn = document.getElementById('chatButton');
+            if (chatBtn) chatBtn.style.display = 'flex';
+            
+            // Load chat messages
+            loadChatMessages();
+            startMessagePolling();
+            
+            console.log('User is logged in:', currentClient.name);
+        } else {
+            currentClient = null;
+            
+            // Update navigation
+            const authLink = document.getElementById('authNavLink');
+            authLink.innerHTML = '👤 Sign Up / Login';
+            authLink.onclick = () => openAuthModal();
+            
+            // Hide chat button
+            const chatBtn = document.getElementById('chatButton');
+            if (chatBtn) chatBtn.style.display = 'none';
+            
+            console.log('User is not logged in');
+        }
+        
+        // Refresh products to update comment button states
+        loadProducts();
+        
+    } catch (error) {
+        console.error('Session check error:', error);
+        currentClient = null;
+        const authLink = document.getElementById('authNavLink');
+        if (authLink) {
+            authLink.innerHTML = '👤 Sign Up / Login';
+            authLink.onclick = () => openAuthModal();
+        }
+    }
+}
+function openAuthModal() {
+    if (currentClient) {
+        openProfileModal();
+    } else {
+        document.getElementById('authModal').classList.add('show');
+    }
+}
+
+async function clientLogin() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    const errorDiv = document.getElementById('authError');
+    
+    errorDiv.innerText = '';
+    
+    if (!email || !password) {
+        errorDiv.innerText = '❌ Email and password required';
+        return;
+    }
+    
+    errorDiv.innerText = 'Logging in...';
+    errorDiv.style.color = '#c97b6b';
+    
+    try {
+        const response = await fetch('/api/client/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            errorDiv.innerText = '✅ Login successful! Refreshing...';
+            errorDiv.style.color = 'green';
+            
+            // Force page reload to ensure session is recognized
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
+        } else {
+            errorDiv.innerText = '❌ ' + (data.error || 'Invalid credentials');
+            errorDiv.style.color = 'red';
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        errorDiv.innerText = '❌ Connection error. Please try again.';
+        errorDiv.style.color = 'red';
+    }
+}
+
+async function clientSignup() {
+    const fullname = document.getElementById('signupFullname').value;
+    const email = document.getElementById('signupEmail').value;
+    const phone = document.getElementById('signupPhone').value;
+    const password = document.getElementById('signupPassword').value;
+    const profilePic = document.getElementById('signupProfilePic').files[0];
+    
+    const errorDiv = document.getElementById('signupError');
+    errorDiv.innerText = '';
+    
+    if (!fullname || !email || !password) {
+        errorDiv.innerText = '❌ Full name, email, and password required';
+        return;
+    }
+    
+    if (password.length < 4) {
+        errorDiv.innerText = '❌ Password must be at least 4 characters';
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append('fullname', fullname);
+    formData.append('email', email);
+    formData.append('phone', phone || '');
+    formData.append('password', password);
+    if (profilePic) formData.append('profile_pic', profilePic);
+    
+    errorDiv.innerText = 'Creating account...';
+    errorDiv.style.color = '#c97b6b';
+    
+    try {
+        const response = await fetch('/api/client/signup', { 
+            method: 'POST', 
+            body: formData 
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            errorDiv.innerText = '✅ Account created! Refreshing...';
+            errorDiv.style.color = 'green';
+            
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500);
+        } else {
+            errorDiv.innerText = '❌ ' + (data.error || 'Signup failed');
+            errorDiv.style.color = 'red';
+        }
+    } catch (error) {
+        console.error('Signup error:', error);
+        errorDiv.innerText = '❌ Connection error. Please try again.';
+        errorDiv.style.color = 'red';
+    }
+}
+
+function showSignup() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'block';
+    document.getElementById('forgotPasswordForm').style.display = 'none';
+}
+
+function showLogin() {
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('forgotPasswordForm').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+}
+
+function showForgotPasswordModal() {
+    document.getElementById('loginForm').style.display = 'none';
+    document.getElementById('signupForm').style.display = 'none';
+    document.getElementById('forgotPasswordForm').style.display = 'block';
+}
+
+async function sendPasswordReset() {
+    const email = document.getElementById('resetEmail').value;
+    const errorDiv = document.getElementById('resetError');
+    
+    if (!email) {
+        errorDiv.innerText = '❌ Email required';
+        errorDiv.style.color = 'red';
+        return;
+    }
+    
+    errorDiv.innerText = 'Checking...';
+    errorDiv.style.color = '#c97b6b';
+    
+    let currentPopupUserId = null;
+
+async function viewUserProfile(userId, userName) {
+    if (!userId || userId === '0') {
+        alert('Guest users don\'t have profiles. Sign up to create one!');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/client/profile/${userId}`);
+        const profile = await response.json();
+        
+        if (profile.error) {
+            alert('User not found');
+            return;
+        }
+        
+        // Populate popup
+        const avatar = document.getElementById('popupAvatar');
+        if (profile.profile_pic) {
+            avatar.src = profile.profile_pic;
+        } else {
+            avatar.src = 'https://via.placeholder.com/80x80?text=' + profile.fullname.charAt(0);
+        }
+        
+        document.getElementById('popupName').innerText = profile.fullname;
+        document.getElementById('popupEmail').innerText = profile.email;
+        document.getElementById('popupBio').innerText = profile.bio || 'No bio yet';
+        document.getElementById('popupMemberSince').innerText = `Member since ${new Date(profile.created_at).toLocaleDateString()}`;
+        
+        // Show message button only if logged in and not viewing own profile
+        const messageBtn = document.getElementById('popupMessageBtn');
+        if (currentClient && currentClient.id !== userId) {
+            messageBtn.style.display = 'block';
+            currentPopupUserId = userId;
+            currentPopupUserName = profile.fullname;
+        } else {
+            messageBtn.style.display = 'none';
+        }
+        
+        // Show popup
+        document.getElementById('profilePopupOverlay').classList.add('show');
+        document.getElementById('profilePopup').classList.add('show');
+        
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        alert('Could not load profile');
+    }
+}
+
+function closeProfilePopup() {
+    document.getElementById('profilePopupOverlay').classList.remove('show');
+    document.getElementById('profilePopup').class.classList.remove('show');
+}
+
+function startChatFromPopup() {
+    closeProfilePopup();
+    // Start a DM with this user
+    startDmWithUser(currentPopupUserId, currentPopupUserName);
+}
+    const response = await fetch('/api/client/forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success && data.resetLink) {
+        errorDiv.innerHTML = `
+            ✅ Password reset link generated!<br>
+            <a href="${data.resetLink}" target="_blank" style="color: #c97b6b; word-break: break-all;">${data.resetLink}</a>
+            <br>Click the link to reset your password.
+        `;
+        errorDiv.style.color = 'green';
+    } else {
+        errorDiv.innerText = data.message || data.error || 'Something went wrong';
+        errorDiv.style.color = 'red';
+    }
+}
+
+async function openProfileModal() {
+    try {
+        const response = await fetch('/api/client/profile/me');
+        const profile = await response.json();
+        const modal = document.getElementById('profileModal');
+        const info = document.getElementById('profileInfo');
+        
+        // Get profile picture URL or use default
+        let profilePicHtml = '';
+        if (profile.profile_pic) {
+            profilePicHtml = `<img src="${profile.profile_pic}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;margin-bottom:15px;border:3px solid #c97b6b;">`;
+        } else {
+            profilePicHtml = `<div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,#c97b6b,#e4a599);display:flex;align-items:center;justify-content:center;color:white;font-size:40px;margin:0 auto 15px auto;">${profile.fullname ? profile.fullname.charAt(0).toUpperCase() : '?'}</div>`;
+        }
+        
+        info.innerHTML = `
+            <div style="text-align:center;">
+                ${profilePicHtml}
+                <p><strong>Name:</strong> ${escapeHtml(profile.fullname)}</p>
+                <p><strong>Email:</strong> ${escapeHtml(profile.email)}</p>
+                <p><strong>Phone:</strong> ${escapeHtml(profile.phone) || 'Not set'}</p>
+                <p><strong>Bio:</strong> ${escapeHtml(profile.bio) || 'No bio yet'}</p>
+                <p><strong>Member since:</strong> ${new Date(profile.created_at).toLocaleDateString()}</p>
+                <button class="btn-3d" onclick="openEditProfileModal()" style="margin-top:10px;">Edit Profile</button>
+            </div>
+        `;
+        modal.classList.add('show');
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        alert('Could not load profile');
+    }
+}
+
+function closeProfileModal() { document.getElementById('profileModal').classList.remove('show'); }
+
+function openEditProfileModal() {
+    closeProfileModal();
+    document.getElementById('editProfileModal').classList.add('show');
+}
+
+function closeEditProfileModal() { document.getElementById('editProfileModal').classList.remove('show'); }
+
+async function updateProfile() {
+    const formData = new FormData();
+    formData.append('fullname', document.getElementById('editFullname').value);
+    formData.append('phone', document.getElementById('editPhone').value);
+    formData.append('bio', document.getElementById('editBio').value);
+    const fileInput = document.getElementById('editProfilePic');
+    if (fileInput.files[0]) formData.append('profile_pic', fileInput.files[0]);
+    
+    const response = await fetch('/api/client/profile', { method: 'PUT', body: formData });
+    const data = await response.json();
+    if (data.success) {
+        closeEditProfileModal();
+        checkClientSession();
+        alert('Profile updated!');
+    }
+}
+
+async function logout() {
+    await fetch('/api/client/logout', { method: 'POST' });
+    currentClient = null;
+    if (messageInterval) clearInterval(messageInterval);
+    checkClientSession();
+    closeProfileModal();
+    loadProducts();
+}
+
+
+            // ========== CHAT FUNCTIONS ==========
+async function loadChatMessages() {
+    if (!currentClient) return;
+    const response = await fetch('/api/client/messages');
+    const messages = await response.json();
+    const container = document.getElementById('chatMessages');
+    
+    if (messages.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:30px;color:#999;">💬 No messages yet. Start a conversation!</div>';
+        return;
+    }
+    
+    // Sort messages from oldest to newest (top to bottom)
+    const sortedMessages = [...messages].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    
+    container.innerHTML = sortedMessages.map(msg => {
+        const isAdmin = msg.is_from_admin === 1 || msg.is_from_admin === true;
+        return `
+            <div style="display: flex; justify-content: ${isAdmin ? 'flex-end' : 'flex-start'}; margin-bottom: 15px;">
+                <div style="max-width: 75%; padding: 12px 18px; border-radius: 20px; ${isAdmin ? 'background: #c97b6b; color: white; border-bottom-right-radius: 5px;' : 'background: white; color: #333; border-bottom-left-radius: 5px; box-shadow: 0 1px 2px rgba(0,0,0,0.05);'}">
+                    <div style="word-wrap: break-word;">${escapeHtml(msg.message)}</div>
+                    <div style="font-size: 10px; opacity: 0.7; margin-top: 5px; text-align: ${isAdmin ? 'right' : 'left'};">${new Date(msg.created_at).toLocaleTimeString()}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    container.scrollTop = container.scrollHeight;
+    await fetch('/api/client/messages/read', { method: 'PUT' });
+    updateUnreadBadge();
+}
+
+        async function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            await fetch('/api/client/messages/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            input.value = '';
+            loadChatMessages();
+        }
+
+        async function updateUnreadBadge() {
+    if (!currentClient) return;
+    const response = await fetch('/api/client/messages/unread-count');
+    const data = await response.json();
+    const badge = document.getElementById('unreadChatBadge');
+    if (data.count > 0) {
+        badge.innerText = data.count;
+        badge.style.display = 'inline-block';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+        function startMessagePolling() {
+    if (messageInterval) clearInterval(messageInterval);
+    messageInterval = setInterval(() => {
+        if (currentClient) {
+            // Update unread badge regardless
+            updateUnreadBadge();
+            // If chat is open, reload messages
+            if (document.getElementById('chatModal').classList.contains('show')) {
+                loadChatMessages();
+            }
+        }
+    }, 3000); // Check every 3 seconds
+}
+
+        function toggleChat() {
+            const modal = document.getElementById('chatModal');
+            modal.classList.toggle('show');
+            if (modal.classList.contains('show') && currentClient) {
+                loadChatMessages();
+            }
+        }
+
+        async function viewUserProfile(userId, userName) {
+    if (!userId || userId === '0' || userId === 0) {
+        alert('Guest users don\'t have profiles. Sign up to create one!');
+        return;
+    }
+    
+    try {
+        const response = await fetch(`/api/client/profile/${userId}`);
+        
+        if (!response.ok) {
+            if (response.status === 404) {
+                alert('User profile not found');
+            } else {
+                alert('Error loading profile');
+            }
+            return;
+        }
+        
+        const profile = await response.json();
+        
+        if (profile.error) {
+            alert(profile.error);
+            return;
+        }
+        
+        // Populate popup
+        const avatar = document.getElementById('popupAvatar');
+        if (profile.profile_pic) {
+            avatar.src = profile.profile_pic;
+        } else {
+            avatar.src = 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="40" fill="#c97b6b"/><text x="40" y="52" text-anchor="middle" fill="white" font-size="30" font-family="Arial">${profile.fullname ? profile.fullname.charAt(0).toUpperCase() : '?'}</text></svg>`);
+        }
+        
+        document.getElementById('popupName').innerText = profile.fullname;
+        document.getElementById('popupEmail').innerText = profile.email;
+        document.getElementById('popupBio').innerText = profile.bio || 'No bio yet';
+        document.getElementById('popupMemberSince').innerText = `Member since ${new Date(profile.created_at).toLocaleDateString()}`;
+        
+        // Show message button only if logged in and not viewing own profile
+        const messageBtn = document.getElementById('popupMessageBtn');
+        if (currentClient && currentClient.id !== userId) {
+            messageBtn.style.display = 'block';
+            window.currentPopupUserId = userId;
+            window.currentPopupUserName = profile.fullname;
+        } else {
+            messageBtn.style.display = 'none';
+        }
+        
+        // Show popup
+        document.getElementById('profilePopupOverlay').classList.add('show');
+        document.getElementById('profilePopup').classList.add('show');
+        
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        alert('Could not load profile. Please try again.');
+    }
+}
+
+function startChatFromPopup() {
+    closeProfilePopup();
+    // For now, just open the main chat
+    openAuthModal();
+}
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        loadProducts();
+        checkClientSession();
+        
+        // Force session check on page load
+window.addEventListener('load', function() {
+    console.log('Page loaded, checking session...');
+    checkClientSession();
+});
+    </script>
+</body>
+</html>
