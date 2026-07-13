@@ -36,15 +36,15 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
 const upload = multer({ storage: storage });
-
 const db = mysql.createConnection({
-    host: process.env.DB_HOST || '127.0.0.1',
-    user: process.env.DB_USER || 'root',
-    password: process.env.DB_PASSWORD || '',
-    database: process.env.DB_NAME || 'ani_beauty_db',
-    port: process.env.DB_PORT || 3306,
-    ssl:process.env.DB_SSL==='true' ? {rejectUnauthorized:false} : false
-
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT || 4000,   // TiDB uses 4000
+    ssl: {
+        rejectUnauthorized: false   // Required for TiDB Cloud
+    }
 });
 
 db.connect((err) => {
