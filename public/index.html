@@ -1164,7 +1164,10 @@ async function updateProfile() {
         closeEditProfileModal();
         checkClientSession();
         alert('Profile updated!');
-    }
+    } else {
+          alert("Problem Updating Profile❌❌");
+          console.log(data);
+}
 }
 
 async function logout() {
