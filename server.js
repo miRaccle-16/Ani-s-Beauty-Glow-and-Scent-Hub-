@@ -395,23 +395,49 @@ app.get("/api/client/profile/:id", (req, res) => {
         });
 });
 
+// ========== CLIENT PROFILE UPDATE ==========
 app.put("/api/client/profile", upload.single("profile_pic"), (req, res) => {
     if (!req.session.clientId) {
         return res.status(401).json({ error: "Not logged in" });
     }
+    
     const { fullname, phone, bio } = req.body;
-    let query = "UPDATE clients SET fullname=?, phone=?, bio=?";
-    let params = [fullname, phone, bio];
+    let query = "UPDATE clients SET ";
+    let params = [];
+    let updates = [];
+
+    if (fullname) {
+        updates.push("fullname = ?");
+        params.push(fullname);
+    }
+    if (phone !== undefined) {
+        updates.push("phone = ?");
+        params.push(phone || null);
+    }
+    if (bio !== undefined) {
+        updates.push("bio = ?");
+        params.push(bio);
+    }
     if (req.file) {
-        query += ", profile_pic=?";
+        updates.push("profile_pic = ?");
         params.push(`/uploads/${req.file.filename}`);
     }
-    query += " WHERE id=?";
+
+    if (updates.length === 0) {
+        return res.status(400).json({ error: "No fields to update" });
+    }
+
+    query += updates.join(", ") + " WHERE id = ?";
     params.push(req.session.clientId);
+
     db.query(query, params, (err) => {
-        if (err) return res.status(500).json({ error: err.message });
-        req.session.clientName = fullname;
-        res.json({ success: true });
+        if (err) {
+            console.error('Profile update error:', err);
+            return res.status(500).json({ error: err.message });
+        }
+        // Update session if fullname changed
+        if (fullname) req.session.clientName = fullname;
+        res.json({ success: true, message: "Profile updated successfully" });
     });
 });
 
