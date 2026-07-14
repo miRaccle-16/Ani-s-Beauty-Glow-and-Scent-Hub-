@@ -1203,7 +1203,7 @@ async function updateProfile() {
         alert('Profile updated!');
     } else {
           alert("Problem Updating Profile❌❌");
-          console.log(data);
+          if(data.error) console.log(`ERROR DETAILS: ${data.error}`);
 }
 }
 
