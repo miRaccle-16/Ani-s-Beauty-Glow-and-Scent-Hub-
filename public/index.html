@@ -422,6 +422,34 @@
             .products-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 1.6rem; }
         }
+
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    background: white;
+    border: 2px dashed #c97b6b;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+    width: 100%;
+}
+
+.custom-file-upload:hover {
+    background: #fff9f7;
+    border-color: #b45f50;
+}
+
+.upload-icon {
+    font-size: 28px;
+}
+
+#file-name {
+    color: #666;
+    font-size: 14px;
+}
     </style>
 </head>
 <body>
@@ -516,7 +544,16 @@
         <input type="text" id="editFullname" placeholder="Full Name">
         <input type="tel" id="editPhone" placeholder="Phone">
         <textarea id="editBio" rows="3" placeholder="Bio"></textarea>
-        <input type="file" id="editProfilePic" accept="image/*">
+
+ <!--New -->
+<div class="file-upload-wrapper">
+    <label for="editProfilePic" class="custom-file-upload">
+        <span class="upload-icon">📸</span>
+        <span id="file-name">Choose Profile Picture</span>
+    </label>
+    <input type="file" id="editProfilePic" accept="image/*" style="display: none;">
+</div>
+
         <button class="btn-3d" onclick="updateProfile()">Save Changes</button>
         <div class="switch-auth" onclick="closeEditProfileModal()">Cancel</div>
     </div>
@@ -1169,6 +1206,16 @@ async function updateProfile() {
           console.log(data);
 }
 }
+
+// Modern file input handler
+document.getElementById('editProfilePic').addEventListener('change', function() {
+    const fileNameEl = document.getElementById('file-name');
+    if (this.files && this.files[0]) {
+        fileNameEl.textContent = this.files[0].name;
+    } else {
+        fileNameEl.textContent = 'Choose Profile Picture';
+    }
+});
 
 async function logout() {
     await fetch('/api/client/logout', { method: 'POST' });
